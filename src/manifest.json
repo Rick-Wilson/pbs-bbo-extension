@@ -1,0 +1,49 @@
+{
+	"manifest_version": 3,
+	"name": "PBS with BBA Compare",
+	"description": "Practice Bidding Scenarios with BBA auction comparison for Bridge Base Online",
+	"version": "1.0.0",
+	"icons": {
+		"16": "icons/BBOalert16.png",
+		"48": "icons/BBOalert48.png",
+		"128": "icons/BBOalert128.png"
+	},
+	"web_accessible_resources": [
+		{
+			"resources": [
+				"iframe/globals.js",
+				"iframe/BBO_DOM.js",
+				"iframe/blogspot.js",
+				"iframe/functions.js",
+				"iframe/BBOalertData.js",
+				"iframe/BBOalertConfig.js",
+				"iframe/custom_syntax.js",
+				"iframe/BBOalertUI.js",
+				"iframe/BBOalertOptions.js",
+				"iframe/BBOobserver.js",
+				"iframe/BBOobserverHandlers.js",
+				"iframe/BBOalert.js",
+				"iframe/webStorage.js",
+				"iframe/init.js"
+			],
+			"matches": [
+				"https://*/*"
+			]
+		}
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://www.bridgebase.com/v3/*"
+			],
+			"css": [
+				"BBOalert.css"
+			],
+			"js": [
+				"jquery-3.5.1.min.js",
+				"PBSiframe.js",
+				"main.js"
+			]
+		}
+	]
+}
