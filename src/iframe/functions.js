@@ -1,3 +1,12 @@
+function downloadTextAsFile(text, filename) {
+	var blob = new Blob([text], { type: 'text/plain' });
+	var a = document.createElement('a');
+	a.href = URL.createObjectURL(blob);
+	a.download = filename;
+	a.click();
+	URL.revokeObjectURL(a.href);
+}
+
 function getBBOalertHeaderMsg() {
 	try {
 		var r = alertTable[0].split(',')[1];
@@ -568,13 +577,9 @@ function dragElement(elmnt) {
 		pos2 = 0,
 		pos3 = 0,
 		pos4 = 0;
-	if (document.getElementById(elmnt.id + "header")) {
-		// if present, the header is where you move the DIV from:
-		document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-	} else {
-		// otherwise, move the DIV from anywhere inside the DIV:
-		elmnt.onmousedown = dragMouseDown;
-	}
+	var dragHandle = document.getElementById(elmnt.id + "header") || elmnt;
+	dragHandle.onmousedown = dragMouseDown;
+	dragHandle.ontouchstart = dragTouchStart;
 
 
 	function dragMouseDown(e) {
@@ -601,10 +606,30 @@ function dragElement(elmnt) {
 		elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 	}
 
+	function dragTouchStart(e) {
+		var touch = e.touches[0];
+		pos3 = touch.clientX;
+		pos4 = touch.clientY;
+		document.ontouchend = closeDragElement;
+		document.ontouchmove = elementTouchDrag;
+	}
+
+	function elementTouchDrag(e) {
+		e.preventDefault();
+		var touch = e.touches[0];
+		pos1 = pos3 - touch.clientX;
+		pos2 = pos4 - touch.clientY;
+		pos3 = touch.clientX;
+		pos4 = touch.clientY;
+		elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+		elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+	}
+
 	function closeDragElement() {
-		// stop moving when mouse button is released:
 		document.onmouseup = null;
 		document.onmousemove = null;
+		document.ontouchend = null;
+		document.ontouchmove = null;
 	}
 
 }
