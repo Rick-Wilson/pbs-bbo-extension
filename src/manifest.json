@@ -4,9 +4,9 @@
 	"description": "Practice Bidding Scenarios with BBA auction comparison for Bridge Base Online",
 	"version": "1.0.0",
 	"icons": {
-		"16": "icons/BBOalert16.png",
-		"48": "icons/BBOalert48.png",
-		"128": "icons/BBOalert128.png"
+		"16": "icons/pbs-bbo16.png",
+		"48": "icons/pbs-bbo48.png",
+		"128": "icons/pbs-bbo128.png"
 	},
 	"web_accessible_resources": [
 		{
