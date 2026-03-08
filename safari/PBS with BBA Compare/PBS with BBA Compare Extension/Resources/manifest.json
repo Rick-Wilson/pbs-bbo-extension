@@ -41,6 +41,15 @@
 			"matches": [
 				"*://www.bridgebase.com/v3/*"
 			],
+			"run_at": "document_start",
+			"js": [
+				"force-desktop.js"
+			]
+		},
+		{
+			"matches": [
+				"*://www.bridgebase.com/v3/*"
+			],
 			"css": [
 				"BBOalert.css"
 			],
