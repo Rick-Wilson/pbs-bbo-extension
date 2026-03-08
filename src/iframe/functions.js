@@ -491,10 +491,14 @@ function addRecentURL(label, url) {
 function isSettingON(idx) {
 	// PBS has no recording or auto-alerts — always enabled for BBAcompare idle mode
 	if (idx == 5 || idx == 6) return true;
+	// Collapse Options removed — always false
+	if (idx == 4) return false;
 	// Setting 8 (BBOalert button) doesn't exist in PBS
 	if (idx == 8) return false;
-	// Silent startup (was index 7) shifted to index 5 in selector after removing 2 settings
-	if (idx > 6) idx -= 2;
+	// Remap original BBOalert indices to current selector positions.
+	// Removed: 4 (Collapse Options), 5 (Disable recording), 6 (Disable auto-alerts), 8 (BBOalert button)
+	// Original 7 (Silent startup) → selector index 4
+	if (idx == 7) idx = 4;
 	var sm = $("#bboalert-menu-settings")[0];
 	if (idx >= sm.options.length) return false;
 	return sm.options[idx].textContent.startsWith(CHECKED_CHAR);
@@ -515,10 +519,15 @@ function restoreSettings() {
 	var s = localStorage.getItem('PBSSettings');
 	// Migrate from old 7-setting format (removed "Disable recording" and "Disable auto-alerts")
 	if (s != null && s.length == 7) {
-		s = s.substring(0, 4) + s.charAt(6);
+		s = s.substring(0, 3) + s.charAt(6);
 		localStorage.setItem('PBSSettings', s);
 	}
-	if (s == null) s = "NNNNN"
+	// Migrate from old 5-setting format (removed "Collapse Options")
+	if (s != null && s.length == 5) {
+		s = s.substring(0, 3) + s.charAt(4);
+		localStorage.setItem('PBSSettings', s);
+	}
+	if (s == null) s = "NNNN"
 	var sm = $("#bboalert-menu-settings")[0];
 	for (var i = 0; i < s.length; i++) {
 		if (s.charAt(i) == 'Y')
@@ -781,7 +790,7 @@ function isAutoShortcutsEnabled() {
 }
 
 function isCollapseOptionsEnabled() {
-	return isSettingON(4);
+	return false;
 }
 
 function isHoverTopEnabled() {
