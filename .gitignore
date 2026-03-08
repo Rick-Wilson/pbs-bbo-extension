@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# Distribution builds
+dist/
+
 # Xcode
 *.xcuserstate
 xcuserdata/

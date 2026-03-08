@@ -60,7 +60,7 @@ If you cloned:
 
 - If you also have BBOalert installed, **disable it** before using this extension to avoid conflicts
 - PBS data URL defaults to the main `-PBS.txt` from the Practice-Bidding-Scenarios repo
-- Plugin configuration (Enable Test Mode, Use Beta Layout) is accessed through the config selector in the Options tab
+- Plugin configuration (Enable Test Mode, Use Beta Layout) is accessed through the config selector in the Data tab
 
 ## License
 
