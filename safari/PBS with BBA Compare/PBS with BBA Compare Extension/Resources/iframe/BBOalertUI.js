@@ -42,7 +42,6 @@ function setControlButtons() {
 		settingsSelector.add(new Option('Shortcuts'));
 		settingsSelector.add(new Option('Hover PBS Tabs'));
 		settingsSelector.add(new Option('Hover BBO Tabs'));
-		settingsSelector.add(new Option('Collapse Options'));
 		settingsSelector.add(new Option('Silent startup'));
 		settingsSelector.onchange = function () {
 			if (this.selectedIndex > 0) {
@@ -50,10 +49,6 @@ function setControlButtons() {
 					this.options[this.selectedIndex].textContent = this.options[this.selectedIndex].textContent.slice(1);
 				} else {
 					this.options[this.selectedIndex].textContent = CHECKED_CHAR + this.options[this.selectedIndex].textContent;
-				}
-				if (this.selectedIndex == 4) {
-					showAllActiveOptions();
-					hideUnusedOptions();
 				}
 			}
 			saveSettings();
@@ -125,7 +120,7 @@ function setAdPanel() {
 	var btBBOalert = document.createElement("button");
 	btBBOalert.textContent = "Data";
 	btBBOalert.id = "bttab-bboalert";
-	btBBOalert.style.width = "33%";
+	btBBOalert.style.width = "50%";
 	btBBOalert.style.height = "100%";
 	btBBOalert.style.fontSize = "16px";
 	btBBOalert.style.backgroundColor = 'blue';
@@ -142,30 +137,10 @@ function setAdPanel() {
 	};
 	adPanelTabs.appendChild(btBBOalert);
 
-	var btOptions = document.createElement("button");
-	btOptions.textContent = "Options";
-	btOptions.id = "bttab-options";
-	btOptions.style.width = "34%";
-	btOptions.style.height = "100%";
-	btOptions.style.fontSize = "16px";
-	btOptions.style.backgroundColor = 'red';
-	btOptions.style.color = 'white';
-	btOptions.style.display = "inline";
-	btOptions.onclick = function () {
-		$("#adpanel").show();
-		$("#adpanel1").hide();
-		$("#adpanel2").hide();
-		document.activeElement.blur();
-	};
-	btOptions.onmouseenter = function () {
-		if (isHoverTopEnabled()) $("#bttab-options")[0].click();
-	};
-	adPanelTabs.appendChild(btOptions);
-
 	var btButtons = document.createElement("button");
 	btButtons.textContent = "Shortcuts";
 	btButtons.id = "bttab-buttons";
-	btButtons.style.width = "33%";
+	btButtons.style.width = "50%";
 	btButtons.style.height = "100%";
 	btButtons.style.fontSize = "16px";
 	btButtons.style.backgroundColor = "rgb(211,211,211";
@@ -175,7 +150,6 @@ function setAdPanel() {
 	btButtons.onclick = function () {
 		if (!isVisible($("#adpanel0")[0])) this.openTab = "none";
 		if (isVisible($("#adpanel1")[0])) this.openTab = "data";
-		if (isVisible($("#adpanel")[0])) this.openTab = "options";
 		$("#adpanel0").show();
 		$("#adpanel").hide();
 		$("#adpanel1").hide();
