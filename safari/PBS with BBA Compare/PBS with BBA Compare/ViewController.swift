@@ -9,7 +9,7 @@ import Cocoa
 import SafariServices
 import WebKit
 
-let extensionBundleIdentifier = "com.rickwilson.pbs-bbo.Extension"
+let extensionBundleIdentifier = "com.rickwilson.PBS-with-BBA-Compare.Extension"
 
 class ViewController: NSViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
